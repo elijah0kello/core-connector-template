@@ -1,0 +1,467 @@
+{
+  "options": {},
+  "name": "mifosCoreConnectorTests",
+  "test_cases": [
+    {
+      "id": 1,
+      "name": "Payee Integration. Receiving Payments in fineract",
+      "fileInfo": {
+        "path": "mifosCoreConnectorTests.json"
+      },
+      "requests": [
+        {
+          "id": 1,
+          "description": "GET /parties/IBAN/{ID}",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "core-connector-api-spec-sdk",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/trigger_templates"
+          },
+          "operationPath": "/parties/IBAN/{ID}",
+          "path": "/parties/IBAN/SK680720000289000000002",
+          "method": "get",
+          "params": {
+            "ID": "SK680720000289000000002"
+          },
+          "url": "http://mifosCoreConnector:3003",
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Check display name",
+                "exec": [
+                  "expect(response.body.displayName).to.equal(\"Dove Love\")"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 2,
+          "description": "POST /quoterequests",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "core-connector-api-spec-sdk",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/trigger_templates"
+          },
+          "operationPath": "/quoterequests",
+          "path": "/quoterequests",
+          "method": "post",
+          "url": "http://mifosCoreConnector:3003",
+          "body": {
+            "homeR2PTransactionId": "string",
+            "amount": "100",
+            "amountType": "SEND",
+            "currency": "NGN",
+            "expiration": "3177-01-09T02:50:53.508-09:33",
+            "extensionList": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ],
+            "feesAmount": "0",
+            "feesCurrency": "ZMW",
+            "from": {
+              "dateOfBirth": "8477-05-21",
+              "displayName": "string",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "firstName": "string",
+              "fspId": "string",
+              "idSubValue": "string",
+              "idType": "MSISDN",
+              "idValue": "string",
+              "lastName": "string",
+              "merchantClassificationCode": "string",
+              "middleName": "string",
+              "type": "string",
+              "supportedCurrencies": [
+                "string"
+              ],
+              "kycInformation": "string"
+            },
+            "geoCode": {
+              "latitude": "string",
+              "longitude": "string"
+            },
+            "initiator": "PAYER",
+            "initiatorType": "CONSUMER",
+            "note": "string",
+            "quoteId": "c8fa8773-990c-44a0-9c55-e0b18db6f7e1",
+            "subScenario": "string",
+            "to": {
+              "dateOfBirth": "8477-05-21",
+              "displayName": "string",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "firstName": "Dove",
+              "fspId": "string",
+              "idSubValue": "string",
+              "idType": "IBAN",
+              "idValue": "SK680720000289000000002",
+              "lastName": "love",
+              "merchantClassificationCode": "string",
+              "middleName": "string",
+              "type": "string",
+              "supportedCurrencies": [
+                "string"
+              ],
+              "kycInformation": "string"
+            },
+            "transactionId": "7045667d-e774-304c-b550-c0bf3c3c69a1",
+            "transactionType": "TRANSFER",
+            "transactionRequestId": "2d97299f-708a-1423-a36d-6df4187d513e",
+            "converter": "converter",
+            "currencyConversion": "string"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Check payeeFspFeeAmount equal to 0",
+                "exec": [
+                  "expect(response.body.payeeFspFeeAmount).to.equal(\"0\")"
+                ]
+              }
+            ]
+          },
+          "disabled": false
+        },
+        {
+          "id": 3,
+          "description": "POST /transfers",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "core-connector-api-spec-sdk",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec-sdk_0.1/trigger_templates"
+          },
+          "operationPath": "/transfers",
+          "path": "/transfers",
+          "method": "post",
+          "url": "http://mifosCoreConnector:3003",
+          "disabled": false,
+          "body": {
+            "homeR2PTransactionId": "string",
+            "amount": "100",
+            "amountType": "SEND",
+            "currency": "NGN",
+            "from": {
+              "dateOfBirth": "8477-05-21",
+              "displayName": "string",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "firstName": "string",
+              "fspId": "string",
+              "idSubValue": "string",
+              "idType": "MSISDN",
+              "idValue": "string",
+              "lastName": "string",
+              "merchantClassificationCode": "string",
+              "middleName": "string",
+              "type": "string",
+              "supportedCurrencies": [
+                "string"
+              ],
+              "kycInformation": "string"
+            },
+            "to": {
+              "dateOfBirth": "8477-05-21",
+              "displayName": "string",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "firstName": "Dove",
+              "fspId": "string",
+              "idSubValue": "string",
+              "idType": "IBAN",
+              "idValue": "SK680720000289000000002",
+              "lastName": "love",
+              "merchantClassificationCode": "string",
+              "middleName": "string",
+              "type": "string",
+              "supportedCurrencies": [
+                "string"
+              ],
+              "kycInformation": "string"
+            },
+            "ilpPacket": {
+              "data": {
+                "amount": {
+                  "amount": "string",
+                  "currency": "string"
+                },
+                "payee": {
+                  "partyIdInfo": {
+                    "partyIdType": "string",
+                    "partyIdentifier": "string"
+                  }
+                },
+                "payer": {
+                  "partyIdInfo": {
+                    "partyIdType": "string",
+                    "partyIdentifier": "string"
+                  }
+                },
+                "quoteId": "string",
+                "transactionId": "string",
+                "transactionType": {
+                  "initiator": "string",
+                  "initiatorType": "string",
+                  "scenario": "string",
+                  "subScenario": "string"
+                }
+              }
+            },
+            "note": "string",
+            "quote": {
+              "expiration": "3945-08-30T22:03:24.190Z",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "geoCode": {
+                "latitude": "string",
+                "longitude": "string"
+              },
+              "payeeFspCommissionAmount": "72",
+              "payeeFspCommissionAmountCurrency": "AED",
+              "payeeFspFeeAmount": "0",
+              "payeeFspFeeAmountCurrency": "AED",
+              "payeeReceiveAmount": "0",
+              "payeeReceiveAmountCurrency": "AED",
+              "quoteId": "71cee55f-c58a-2a8e-8289-e18a2c80bf48",
+              "transactionId": "2861d780-60f5-5127-a73b-ab0617c00f72",
+              "transferAmount": "0.9",
+              "transferAmountCurrency": "AED"
+            },
+            "quoteRequestExtensions": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ],
+            "subScenario": "string",
+            "transactionType": "string",
+            "transferId": "string",
+            "transactionRequestId": "string"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(201)"
+                ]
+              },
+              {
+                "id": 2,
+                "description": "Check transfer state. Should be committed",
+                "exec": [
+                  "expect(response.body.transferState).to.equal(\"COMMITTED\")"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Payer Integration. Sending payments from fineract",
+      "fileInfo": {
+        "path": "mifosCoreConnectorTests.json"
+      },
+      "meta": {
+        "info": ""
+      },
+      "requests": [
+        {
+          "id": 1,
+          "description": "POST /transfers",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "core-connector-api-spec-dfsp",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_0.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_0.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_0.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_0.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec-dfsp_0.1/trigger_templates"
+          },
+          "operationPath": "/transfers",
+          "path": "/transfers",
+          "method": "post",
+          "url": "http://mifoscoreconnector:3004",
+          "body": {
+            "homeTransactionId": "string",
+            "amount": "100",
+            "amountType": "SEND",
+            "currency": "AED",
+            "from": {
+              "fineractAccountId": 2,
+              "payer": {
+                "dateOfBirth": "8477-05-21",
+                "displayName": "string",
+                "extensionList": [
+                  {
+                    "key": "string",
+                    "value": "string"
+                  }
+                ],
+                "firstName": "string",
+                "fspId": "string",
+                "idSubValue": "string",
+                "idType": "MSISDN",
+                "idValue": "string",
+                "lastName": "string",
+                "merchantClassificationCode": "1234",
+                "middleName": "string",
+                "type": "CONSUMER"
+              }
+            },
+            "to": {
+              "dateOfBirth": "8477-05-21",
+              "displayName": "string",
+              "extensionList": [
+                {
+                  "key": "string",
+                  "value": "string"
+                }
+              ],
+              "firstName": "string",
+              "fspId": "string",
+              "idSubValue": "string",
+              "idType": "MSISDN",
+              "idValue": "string",
+              "lastName": "string",
+              "merchantClassificationCode": "1234",
+              "middleName": "string",
+              "type": "CONSUMER"
+            },
+            "note": "string",
+            "quoteRequestExtensions": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ],
+            "subScenario": "HELLO",
+            "transactionType": "TRANSFER"
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check reponse status is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "description": "PUT /transfers/{id}",
+          "apiVersion": {
+            "minorVersion": 1,
+            "majorVersion": 0,
+            "type": "core-connector-api-spec-dfsp",
+            "asynchronous": false,
+            "additionalApi": true,
+            "specFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_0.1/api_spec.yaml",
+            "callbackMapFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_0.1/callback_map.json",
+            "responseMapFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_0.1/response_map.json",
+            "jsfRefFile": "spec_files/api_definitions/core-connector-api-spec-dfsp_0.1/mockRef.json",
+            "triggerTemplatesFolder": "spec_files/api_definitions/core-connector-api-spec-dfsp_0.1/trigger_templates"
+          },
+          "operationPath": "/transfers/{transferId}",
+          "path": "/transfers/549f2c1a-ba0f-237a-944e-10592ea7052e",
+          "method": "put",
+          "params": {
+            "transferId": "549f2c1a-ba0f-237a-944e-10592ea7052e"
+          },
+          "url": "http://mifoscoreconnector:3004",
+          "body": {
+            "acceptQuote": true,
+            "fineractTransaction": {
+              "fineractAccountId": 2,
+              "totalAmount": 100,
+              "routingCode": "12445",
+              "receiptNumber": "23249993",
+              "bankNumber": "7823"
+            }
+          },
+          "tests": {
+            "assertions": [
+              {
+                "id": 1,
+                "description": "Check status code is 200",
+                "exec": [
+                  "expect(response.status).to.equal(200)"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

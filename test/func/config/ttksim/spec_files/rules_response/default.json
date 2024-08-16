@@ -1,0 +1,172 @@
+[
+  {
+    "ruleId": 1,
+    "priority": 1,
+    "description": "post /transfers",
+    "apiVersion": {
+      "minorVersion": 0,
+      "majorVersion": 1,
+      "type": "sdk-outbound-openapi: 3",
+      "asynchronous": false,
+      "prefix": "/sdk-out-bound",
+      "additionalApi": true,
+      "specFile": "spec_files/api_definitions/sdk-outbound-openapi: 3_1.0/api_spec.yaml",
+      "callbackMapFile": "spec_files/api_definitions/sdk-outbound-openapi: 3_1.0/callback_map.json",
+      "responseMapFile": "spec_files/api_definitions/sdk-outbound-openapi: 3_1.0/response_map.json",
+      "jsfRefFile": "spec_files/api_definitions/sdk-outbound-openapi: 3_1.0/mockRef.json",
+      "triggerTemplatesFolder": "spec_files/api_definitions/sdk-outbound-openapi: 3_1.0/trigger_templates"
+    },
+    "conditions": {
+      "all": [
+        {
+          "fact": "operationPath",
+          "operator": "equal",
+          "value": "/transfers"
+        },
+        {
+          "fact": "method",
+          "operator": "equal",
+          "value": "post"
+        }
+      ]
+    },
+    "event": {
+      "method": null,
+      "path": null,
+      "params": {
+        "body": {
+          "transferId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "homeTransactionId": "string",
+          "from": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "16135551212",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "Henrik",
+            "middleName": "Johannes",
+            "lastName": "Karlsson",
+            "dateOfBirth": "1966-06-16",
+            "merchantClassificationCode": "string",
+            "fspId": "string",
+            "extensionList": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ]
+          },
+          "to": {
+            "type": "CONSUMER",
+            "idType": "MSISDN",
+            "idValue": "16135551212",
+            "idSubValue": "string",
+            "displayName": "string",
+            "firstName": "Henrik",
+            "middleName": "Johannes",
+            "lastName": "Karlsson",
+            "dateOfBirth": "1966-06-16",
+            "merchantClassificationCode": "string",
+            "fspId": "string",
+            "extensionList": [
+              {
+                "key": "string",
+                "value": "string"
+              }
+            ]
+          },
+          "amountType": "RECEIVE",
+          "currency": "AED",
+          "amount": "123.45",
+          "transactionType": "TRANSFER",
+          "subScenario": "LOCALLY_DEFINED_SUBSCENARIO",
+          "note": "Note sent to Payee.",
+          "currentState": "ERROR_OCCURRED",
+          "quoteId": "b51ec534-ee48-4575-b6a9-ead2955b8069",
+          "getPartiesResponse": {
+            "body": {},
+            "headers": {}
+          },
+          "quoteResponse": {
+            "body": {
+              "transferAmount": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "payeeReceiveAmount": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "payeeFspFee": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "payeeFspCommission": {
+                "currency": "AED",
+                "amount": "123.45"
+              },
+              "expiration": "2016-05-24T08:38:08.699-04:00",
+              "geoCode": {
+                "latitude": "+45.4215",
+                "longitude": "+75.6972"
+              },
+              "ilpPacket": "AYIBgQAAAAAAAASwNGxldmVsb25lLmRmc3AxLm1lci45T2RTOF81MDdqUUZERmZlakgyOVc4bXFmNEpLMHlGTFGCAUBQU0svMS4wCk5vbmNlOiB1SXlweUYzY3pYSXBFdzVVc05TYWh3CkVuY3J5cHRpb246IG5vbmUKUGF5bWVudC1JZDogMTMyMzZhM2ItOGZhOC00MTYzLTg0NDctNGMzZWQzZGE5OGE3CgpDb250ZW50LUxlbmd0aDogMTM1CkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24vanNvbgpTZW5kZXItSWRlbnRpZmllcjogOTI4MDYzOTEKCiJ7XCJmZWVcIjowLFwidHJhbnNmZXJDb2RlXCI6XCJpbnZvaWNlXCIsXCJkZWJpdE5hbWVcIjpcImFsaWNlIGNvb3BlclwiLFwiY3JlZGl0TmFtZVwiOlwibWVyIGNoYW50XCIsXCJkZWJpdElkZW50aWZpZXJcIjpcIjkyODA2MzkxXCJ9IgA",
+              "condition": "string",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "string",
+                    "value": "string"
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "quoteResponseSource": "string",
+          "fulfil": {
+            "body": {
+              "fulfilment": "WLctttbu2HvTsa1XWvUoGRcQozHsqeu9Ahl2JW9Bsu8",
+              "completedTimestamp": "2016-05-24T08:38:08.699-04:00",
+              "transferState": "RESERVED",
+              "extensionList": {
+                "extension": [
+                  {
+                    "key": "string",
+                    "value": "string"
+                  }
+                ]
+              }
+            },
+            "headers": {}
+          },
+          "lastError": {
+            "httpStatusCode": 0,
+            "mojaloopError": {
+              "errorInformation": {
+                "errorCode": "5100",
+                "errorDescription": "string",
+                "extensionList": {
+                  "extension": [
+                    {
+                      "key": "string",
+                      "value": "string"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "skipPartyLookup": true
+        },
+        "statusCode": "200",
+        "scripts": {
+          "scriptingEngine": "postman"
+        }
+      },
+      "type": "FIXED_RESPONSE"
+    },
+    "type": "response",
+    "version": 1
+  }
+]

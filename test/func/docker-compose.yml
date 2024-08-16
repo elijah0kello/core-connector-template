@@ -1,0 +1,80 @@
+version: "3.8"
+networks:
+  mojaloop-net:
+    name: mojaloop-net
+
+
+services:
+  mifosCoreConnector:
+    image: mojaloop/mifos-core-connector:local
+    build:
+      context: ../..
+    networks:
+      - mojaloop-net
+    environment:
+      - FINERACT_TENANT_ID=default
+      - FINERACT_AUTH_MODE=basic
+      - FINERACT_USERNAME=mifos
+      - FINERACT_PASSWORD=password
+      - FINERACT_BANK_ID=0720
+      - FINERACT_ACCOUNT_PREFIX=000289
+      - FINERACT_BANK_COUNTRY_CODE=UG
+      - FINERACT_CHECK_DIGITS=68
+      - FINERACT_LOCALE=en
+      - SDK_SERVER_HOST=mifosCoreConnector
+      - SDK_SERVER_PORT=3003
+      - DFSP_SERVER_HOST=mifosCoreConnector
+      - DFSP_SERVER_PORT=3004
+      - FINERACT_BASE_URL=https://demo.mifos.io/fineract-provider/api/v1
+      - SDK_BASE_URL=http://sdkSchemeAdapterOutbound:4010
+    ports:
+      - "3003:3003"
+      - "3004:3004"
+
+  sdkSchemeAdapterOutbound:
+    image: stoplight/prism:4
+    networks:
+      - mojaloop-net
+    command: mock -h sdkSchemeAdapterOutbound "/tmp/api.oas2.yml"
+    volumes:
+      - ../../src/api-spec:/tmp
+    ports:
+      - "4010:4010"
+    init: true
+    container_name: sdk_adapter
+    restart: unless-stopped
+
+  TtkBackend:
+    networks:
+      - mojaloop-net
+    ## TODO: Change the following version to standard version
+    image: mojaloop/ml-testing-toolkit:v15.6.3
+    # image: mojaloop/ml-testing-toolkit:v16.1.0-snapshot.3
+    user: root
+    volumes:
+      - "./config/ttksim/spec_files:/opt/app/spec_files"
+      - "./config/ttksim/environments:/opt/app/examples/environments"
+    ports:
+      - "4040:4040"
+      - "5050:5050"
+    environment:
+      - AUTH_ENABLED=FALSE
+    command: npm start
+    healthcheck:
+      test: ["CMD-SHELL", "nc localhost 4040"]
+      interval: 5s
+      timeout: 10s
+      retries: 3
+
+  TtkUi:
+    image: mojaloop/ml-testing-toolkit-ui:v15.3.0
+    ports:
+      - "6060:6060"
+    networks:
+      - mojaloop-net
+    environment:
+      - API_BASE_URL=http://localhost:5050
+      - AUTH_ENABLED=FALSE
+    command:
+      - sh
+      - /usr/share/nginx/start.sh

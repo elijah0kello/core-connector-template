@@ -1,0 +1,97 @@
+openapi: 3.0.3
+info:
+  title: Mifos Core Connector for Mojaloop SDK Scheme Adapter API
+  version: 0.0.1
+  description: >
+    API Specification for the Mifos Core Connector from the SDK Scheme Adapter
+    
+    This API is to be implemented by the DFSP
+  license:
+    name: Apache License Version 2.0, January 2004
+    url: http://www.apache.org/licenses/
+
+paths:
+  /parties/IBAN/{ID}:
+    post:
+      tags:
+        - Get Parties
+      summary: Perform Account Lookup in Fineract.
+      description: Lookup a party from a remote fineract instance from IBAN
+      operationId: getParties
+      parameters:
+        - name: ID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Return Party Information"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartyInfo'
+        '404':
+          description: "Party with IBAN does not exist in fineract"
+        '500':
+          description: "Internal Server Error"
+    
+
+components:
+  schemas:
+    IdType:
+      type: string
+      enum:
+        - IBAN
+    
+    PartyInfo:
+      type: object
+      required:
+        - idType
+        - idValue
+      properties:
+        dateOfBirth:
+          type: string
+          example: "8477-05-21"
+        displayName:
+          type: string
+        extensionList:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+        firstName:
+          type: string
+          description: 'First Name'
+        fspId:
+          type: string
+          description: 'FSP Id'
+        idSubValue:
+          type: string
+          description: 'Id Sub Value'
+        idType:
+          $ref: '#/components/schemas/IdType'
+        idValue:
+          type: string
+          description: 'ID Value'
+        lastName:
+          type: string
+        merchantClassificationCode:
+          type: string
+        middleName:
+          type: string
+        type:
+          type: string
+        supportedCurrencies:
+          type: array
+          items:
+            type: string
+        kycInformation:
+          type: string
+
+
+

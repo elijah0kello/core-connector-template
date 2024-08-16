@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  prism:
+    image: stoplight/prism:4
+    command: mock -h 0.0.0.0 "/tmp/api.oas2.yml"
+    volumes:
+      - ../../src/api-spec:/tmp
+    ports:
+      - "4010:4010"
+    init: true
+    container_name: sdk_adapter
+    restart: unless-stopped
