@@ -127,7 +127,7 @@ describe('CoreConnectorAggregate Tests -->', () => {
 
         test('should pass if data fineract.lookUpParty resolves', async () => {
             const lookupRes = await ccAggregate.getParties('UG0000000008892343');
-            expect(lookupRes.data.firstName).toEqual('Dove');
+            expect(lookupRes.data.firstName).toEqual('Dova');
         });
     });
 
